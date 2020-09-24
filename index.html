@@ -104,10 +104,11 @@ a:hover{
 var reposList = document.getElementById('repos-list'),
 	projectsCount = document.getElementById('projects-count'),
 	projectsInfo = document.getElementById('projects-info'),
+	repositories = [],
 	load = function(data){
 		if (!data || !data.data || !data.data.length) return;
-		var repositories = data.data,
-			html = '';
+		repositories.push.apply(repositories, data.data);
+		var html = '';
 		repositories.sort(function(a, b){
 			var aFork = a.fork, bFork = b.fork;
 			if (aFork && !bFork) return 1;
@@ -136,3 +137,5 @@ var reposList = document.getElementById('repos-list'),
 	};
 </script>
 <script src="https://api.github.com/users/clehner/repos?callback=load&per_page=100"></script>
+<script src="https://api.github.com/users/clehner/repos?callback=load&per_page=100&page=2"></script>
+<script src="https://api.github.com/users/clehner/repos?callback=load&per_page=100&page=3"></script>
